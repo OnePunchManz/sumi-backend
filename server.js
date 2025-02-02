@@ -10,16 +10,13 @@ const port = process.env.PORT || 8080;
 // CORS Configuration
 const allowedOrigins = [
     "http://localhost:3000",
-    process.env.SUMI_FE_URL // Use the environment variable directly
+    process.env.SUMI_FE_URL // Use frontend URL from Render env variables
 ];
-
-// Allow preflight requests for all routes
-app.options("*", cors());
 
 app.use(cors({
     origin: (origin, callback) => {
         if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
+            callback(null, origin); // Set the allowed origin dynamically
         } else {
             console.error("Blocked by CORS:", origin);
             callback(new Error("CORS not allowed"));
@@ -27,6 +24,9 @@ app.use(cors({
     },
     credentials: true
 }));
+
+// Allow Preflight Requests (OPTIONS method)
+app.options("*", cors());
 
 
 app.use(express.json());
