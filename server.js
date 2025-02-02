@@ -10,7 +10,7 @@ const port = process.env.PORT || 8080;
 // CORS Configuration
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://your-frontend-url.onrender.com" // Update with your frontend URL
+    `${process.env.SUMI_FE_URL}` // Update with your frontend URL
 ];
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
