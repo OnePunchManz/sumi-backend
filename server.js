@@ -25,9 +25,6 @@ app.use(cors({
     credentials: true
 }));
 
-// Allow Preflight Requests (OPTIONS method)
-app.options("*", cors());
-
 
 app.use(express.json());
 app.use(session({
